@@ -1,8 +1,6 @@
-PATH		=	/usr/bin/
-
-GCC 		= 	$(PATH)gcc
-NASM 		=	$(PATH)nasm
-LD			=	$(PATH)ld
+GCC 		= 	gcc
+NASM 		=	nasm
+LD			=	ld
 
 GCCFLAGS 	=	-m32 -c -o
 NASMFLAGS	= 	-f elf32 -o
