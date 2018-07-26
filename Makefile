@@ -10,11 +10,11 @@ SRCS_GCC	=	kernel/kernel.c
 SRCS_NASM	=	grub/grub.asm
 SRCS_LD		=	my_kernel
 
-OBJS_GCC	=	kernel.o
-OBJS_NASM	=	grub.o
+OBJS_GCC	=	./kernel.o
+OBJS_NASM	=	./grub.o
 OBJS_LD		=   $(OBJS_NASM) $(OBJS_GCC)
 
-LD_SCRIPT	=   ld/linker.ld
+LD_SCRIPT	=   ./ld/linker.ld
 
 all : $(SRCS_LD)
 
