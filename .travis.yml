@@ -1,1 +1,3 @@
-script: make
+script: 
+- apt-get install nasm
+- make
