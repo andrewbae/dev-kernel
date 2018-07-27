@@ -1,23 +1,31 @@
+#define VGA_VIDEO_COLUMMS	 		80
+#define VGA_VIDEO_LINES				25
+#define VGA_VIDEO_CHARACTER_BYTE	2
+#define VGA_VIDIO_MEMORY_ADDRESS	0xb8000 //General-Purpose I/O(256bytes 8000~80FF) in Memory-mapped I/O
+
 void kmain(void)
 {
-        const char *str = "daniel smith kernel";
-        char *vidptr = (char*)0xb8000;
-        unsigned int i = 0;
-        unsigned int j = 0;
+        const char		*VideoText		= "daniel smith kernel";
+        volatile char 	*VideoMemory	= (volatile char *)VGA_VIDIO_MEMORY_ADDRESS;
+		
+		unsigned int VideoTextNumber 	= 0;
+		unsigned int VideoNumber		= 0;
 
-	    while(j < 80 * 25 * 2) {
-		        vidptr[j] = ' ';
-		        vidptr[j+1] = 0x07; 		
-		        j = j + 2;
+		// Initialization VGA Memory space
+	    while(VideoNumber < VGA_VIDEO_COLUMMS * VGA_VIDEO_LINES * VGA_VIDEO_CHARACTER_BYTE) {
+		        VideoMemory[VideoNumber] = ' ';
+				//VGA Text mode color(0x0F is set background to black and text color white)
+		        VideoMemory[VideoNumber + 1] = 0x0F; 		
+		        VideoNumber = VideoNumber + 2;
 	    }
 
-	    j = 0;
+	    VideoNumber = 0;
 
-	    while(str[j] != '\0') {
-		        vidptr[i] = str[j];
-		        vidptr[i+1] = 0x07;
-		        ++j;
-		        i = i + 2;
+	    while(VideoText[VideoTextNumber] != '\0') {
+		        VideoMemory[VideoNumber] = VideoText[VideoTextNumber];
+		        VideoMemory[VideoNumber + 1] = 0x0F;
+		        ++VideoTextNumber;
+		        VideoNumber = VideoNumber + 2;
 	    }
         
 	return;
