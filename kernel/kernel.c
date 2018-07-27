@@ -1,15 +1,15 @@
-#define VGA_VIDEO_COLUMMS	 		80
-#define VGA_VIDEO_LINES				25
-#define VGA_VIDEO_CHARACTER_BYTE	2
-#define VGA_VIDIO_MEMORY_ADDRESS	0xb8000 //General-Purpose I/O(256bytes 8000~80FF) in Memory-mapped I/O
+#define VGA_VIDEO_COLUMMS 80
+#define VGA_VIDEO_LINES 25
+#define VGA_VIDEO_CHARACTER_BYTE 2
+#define VGA_VIDIO_MEMORY_ADDRESS 0xb8000 //General-Purpose I/O(256bytes 8000~80FF) in Memory-mapped I/O
 
 void kmain(void)
 {
-        const char		*VideoText		= "daniel smith kernel";
-        volatile char 	*VideoMemory	= (volatile char *)VGA_VIDIO_MEMORY_ADDRESS;
+        const char *VideoText = "daniel smith kernel";
+        volatile char *VideoMemory = (volatile char *)VGA_VIDIO_MEMORY_ADDRESS;
 		
-		unsigned int VideoTextNumber 	= 0;
-		unsigned int VideoNumber		= 0;
+		unsigned int VideoTextNumber = 0;
+		unsigned int VideoNumber = 0;
 
 		// Initialization VGA Memory space
 	    while(VideoNumber < VGA_VIDEO_COLUMMS * VGA_VIDEO_LINES * VGA_VIDEO_CHARACTER_BYTE) {
