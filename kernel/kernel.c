@@ -1,4 +1,4 @@
-#include "linux/video.h"
+#include <linux/video.h>
 
 void kmain(void)
 {
@@ -6,5 +6,7 @@ void kmain(void)
 
 		vga_cls(0x0F);
 		vga_write(VideoText, 0x0F);
+		vga_write("overlap test ", 0x0F);
+		vga_write("overlap test", 0x0F);
 	return;
 }
