@@ -8,14 +8,16 @@
 ### Overview
 Clone this repository in your computer and just enter 'make' in your terminal
 ```bash
-$ git clone https://github.com/danielsmith0612/dev-kernel
+$ git clone https://github.com/danielsmith0612/dev-kernel.git
 $ cd ./dev-kernel
 $ make
 ```
 
-enter this command in your terminal for running kernel
+if you wanna build this kernel, please reference next commands
 ```bash
-$ make run
+$ make          #build kernel
+$ make clean    #remove object files
+$ make run      #run this kernel in qemu
 ```
 
 if you not install qemu, run this command
