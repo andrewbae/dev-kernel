@@ -1,31 +1,22 @@
-GCC 		= 	gcc
-NASM 		=	nasm
-LD			=	ld
+ARCH 		=   x86
+KERNEL      =   kernel.elf
 
-GCCFLAGS 	=	-Iinclude/ -m32 -c -o
-NASMFLAGS	= 	-f elf32 -o
-LDFLAGS 	=	-m elf_i386 -T
+include ./arch/$(ARCH)/boot/config.make
+include ./arch/$(ARCH)/boot/Makefile
 
-SRCS_GCC	=	kernel/kernel.c
-SRCS_NASM	=	boot/boot.asm
-SRCS_LD		=	my_kernel
+all : $(KERNEL)
 
-OBJS_GCC	=	kernel.o
-OBJS_NASM	=	boot.o
-OBJS_LD		=   $(OBJS_NASM) $(OBJS_GCC)
-
-LD_SCRIPT	=   ld/linker.ld
-
-all : $(SRCS_LD)
-
-$(OBJS_GCC)		: $(SRCS_GCC)
-		$(GCC)	$(GCCFLAGS) $@ $^
-
-$(OBJS_NASM) 	: $(SRCS_NASM)
-		$(NASM) $(NASMFLAGS) $@ $^
-		
-$(SRCS_LD) 		: $(OBJS_LD)
+$(KERNEL) 		: $(OBJS)
 		$(LD) $(LDFLAGS) $(LD_SCRIPT) -o $@ $^
 
+%.o 	: %.c
+		$(GCC)	$(GCCFLAGS) $@ $^
+
+%.o  	: %.asm
+		$(NASM) $(NASMFLAGS) $@ $^
+
 clean 	:
-		rm *.o $(OBJS_LD)
+		rm -f ./arch/$(ARCH)/boot/*.o
+
+run     :
+		qemu-system-i386 -kernel $(KERNEL)
