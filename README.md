@@ -13,9 +13,9 @@ $ cd ./dev-kernel
 $ make
 ```
 
-enter this command in your terminal for running this kernel
+enter this command in your terminal for running kernel
 ```bash
-$ qemu-system-i386 -kernel ./my_kernel
+$ make run
 ```
 
 if you not install qemu, run this command
